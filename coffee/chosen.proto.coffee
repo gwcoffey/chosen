@@ -236,6 +236,7 @@ class @Chosen extends AbstractChosen
 
   update_results_content: (content) ->
     @search_results.update content
+    @form_field.fire("chosen:filter", {chosen: this})
 
   results_hide: ->
     if @results_showing
