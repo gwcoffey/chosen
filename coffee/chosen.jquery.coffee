@@ -243,7 +243,7 @@ class Chosen extends AbstractChosen
 
   update_results_content: (content) ->
     @search_results.html content
-    @form_field_jq.trigger("chosen:filter", {chosen: this})
+    @form_field_jq.trigger("chosen:update_results", {chosen: this})
 
   results_hide: ->
     if @results_showing
@@ -301,6 +301,7 @@ class Chosen extends AbstractChosen
       close_link.bind 'click.chosen', (evt) => this.choice_destroy_link_click(evt)
       choice.append close_link
 
+    @form_field_jq.trigger("chosen:add_choice", {chosen: this, choice: choice})
     @search_container.before  choice
 
   choice_destroy_link_click: (evt) ->
@@ -421,6 +422,9 @@ class Chosen extends AbstractChosen
   no_results_clear: ->
     @search_results.find(".no-results").remove()
 
+  trigger_filter_event: ->
+    @form_field_jq.trigger("chosen:filter", {chosen: this})
+  
   keydown_arrow: ->
     if @results_showing and @result_highlight
       next_sib = @result_highlight.nextAll("li.active-result").first()
