@@ -60,9 +60,8 @@ class AbstractChosen
       @activate_field() unless @active_field
 
   input_blur: (evt) ->
-    if not @mouse_on_container
-      @active_field = false
-      setTimeout (=> this.blur_test()), 100
+    @active_field = false
+    setTimeout (=> this.blur_test()), 100
 
   results_option_build: (options) ->
     content = ''
